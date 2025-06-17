@@ -131,8 +131,10 @@ app.use((req, res, next) => {
 
 
 
-
-
+//Routes Section
+app.get("/", (req, res) => {
+   res.redirect("/listings");
+});
 
 
 app.use("/listings", listingRouter);
