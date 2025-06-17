@@ -11,6 +11,10 @@ const User = require("../models/user.js");
 module.exports.signup = async (req, res, next) => {
  try {
    let { username, email, password } = req.body;
+   const existingEmailUser = await User.findOne({ email });
+   if(existingEmailUser){
+    req.flash("error", "Email already exists. Please log in!");
+    return res.redirect("/login); }               
    const newUser = new User({email, username});
    const registeredUser = await User.register(newUser, password);
    console.log(registeredUser);
